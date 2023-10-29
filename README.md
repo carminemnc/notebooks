@@ -1,1 +1,1 @@
-*Notebooks, studies and experiments on various fields, again*
+*Notebooks, studies and experiments on various fields*
