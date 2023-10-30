@@ -1,0 +1,24 @@
+# utils libraries
+pandas
+numpy
+datetime
+time
+glob2
+requests
+json
+cdsapi
+fitter
+geopandas
+pygeohash
+xarray
+# visualization libraries
+matplotlib
+plotly
+altair
+seaborn
+plotnine
+# pre-processing libraries
+miceforest
+# ml libraries
+mango
+scikit-learn
