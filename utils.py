@@ -30,7 +30,9 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import GradientBoostingRegressor,ExtraTreesRegressor,RandomForestRegressor
 from mango import Tuner # bayesian optimization package
 
+# settings
 sns.set()
+from credentials import credentials
 
 class BayesianRegressors:
     
@@ -137,8 +139,8 @@ class Voyager:
     
     def copernicus_downloader(self,variables,years,months,days,hours,sub_region,download_path,file_name):
         
-        c = cdsapi.Client(url='https://cds.climate.copernicus.eu/api/v2',
-                          key='260191:aa56acfd-827b-4093-a2be-ba245a9ef80a',
+        c = cdsapi.Client(url=credentials['copernicus_url'],
+                          key=credentials['copernicus_key'],
                           progress=True)
         
         c.retrieve(
