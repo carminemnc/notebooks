@@ -167,7 +167,6 @@ class Voyager:
         data = xrarray_data.to_dataframe().reset_index()
         # renaming variables with original names
         vlist = [e for e in data.columns.to_list() if e not in ('latitude','longitude','time')]
-        print(vlist)
         data.rename(columns=dict(zip(vlist,variables)),inplace=True)
         # categorizing precipitation_type
         if 'precipitation_type' in data.columns:
