@@ -11,6 +11,7 @@ fitter
 geopandas
 pygeohash
 xarray
+mapply
 # visualization libraries
 matplotlib
 plotly

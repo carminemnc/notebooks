@@ -1,5 +1,6 @@
 # utils libraries
 import pandas as pd
+import mapply # multi-core apply function for pandas
 import numpy as np
 import time,datetime,glob,requests,os,json,cdsapi
 from fitter import Fitter, get_common_distributions, get_distributions
@@ -31,8 +32,9 @@ from sklearn.ensemble import GradientBoostingRegressor,ExtraTreesRegressor,Rando
 from mango import Tuner # bayesian optimization package
 
 # settings
-sns.set()
 from credentials import credentials
+plt.style.use('https://raw.githubusercontent.com/carminemnc/utils/main/dark-theme.mplstyle') # custom matplotib style
+
 
 class BayesianRegressors:
     
@@ -153,29 +155,18 @@ class Voyager:
                 'month': months,
                 'day': days,
                 'time': hours,
-                'area': sub_region,
+                'area': sub_region
             },
             f'{download_path}/{file_name}.nc')
         
         return
     
-    def copernicus_to_dataframe(self,variables,file_path):
+    def copernicus_to_dataframe(self,file_path):
         
         # read data
         xrarray_data = xr.open_dataset(file_path)
         # to dataframe
         data = xrarray_data.to_dataframe().reset_index()
-        # renaming variables with original names
-        vlist = [e for e in data.columns.to_list() if e not in ('latitude','longitude','time')]
-        data.rename(columns=dict(zip(vlist,variables)),inplace=True)
-        # categorizing precipitation_type
-        if 'precipitation_type' in data.columns:
-            data['precipitation_type'] = round(data['precipitation_type']).astype(np.int64)
-        # converting temperature in Celsius degrees (°C)
-        if '2m_temperature' in data.columns:
-            data['2m_temperature'] = data['2m_temperature'] - 273.15
-        # reordering columns
-        data = data[['latitude','longitude','time'] + variables]
         
         return data
     
